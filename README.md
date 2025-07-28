@@ -1,6 +1,6 @@
 # Atmois's Custom Bazzite Image
 
-I made this so I could install some extra stuff (and remove some of the default stuff) from `ghcr.io/ublue-os/bazzite-gnome-nvidia`, I won't take PRs or anything for it as its just for my own personal use. Some of the changes I have done are listed below. I would personally not reccommend you use this for your own setup unless you know what you are doing.
+I made this so I could install some extra stuff (and remove some of the default stuff) from `ghcr.io/ublue-os/bazzite-dx-nvidia-gnome`, I won't take PRs or anything for it as its just for my own personal use. Some of the changes I have done are listed below. I would personally not reccommend you use this for your own setup unless you know what you are doing.
 
 ### Sources
 
