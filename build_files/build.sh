@@ -2,6 +2,7 @@
 set -ouex pipefail
 
 # Packages
+dnf5 -y config-manager setopt "terra".enabled=true
 terraPackages=(
     "vesktop"
     "feishin"
