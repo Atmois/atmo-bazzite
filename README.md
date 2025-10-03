@@ -13,3 +13,6 @@ I made this so I could install some extra stuff (and remove some of the default 
 #### [Terra](https://terra.fyralabs.com)
 - [Feishin](https://github.com/jeffvli/feishin)
 - [Vesktop](https://vesktop.vencord.dev)
+
+#### Local Packages
+- [Filen](https://filen.io)
