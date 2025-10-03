@@ -10,7 +10,7 @@ terraPackages=(
 )
 
 wget -O Filen_linux_x86_64.rpm https://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_x86_64.rpm
-packages=(
+direct_packages=(
     "./Filen_linux_x86_64.rpm"
 )
 
