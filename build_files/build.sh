@@ -16,6 +16,7 @@ direct_packages=(
 
 packages=(
     ${terraPackages[@]}
+    ${direct_packages[@]}
 )
 
 dnf install -y ${packages[@]}
