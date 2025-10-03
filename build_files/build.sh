@@ -1,8 +1,10 @@
 #!/bin/bash
 set -ouex pipefail
 
-# Packages
+# Prework
+rm -rf /opt/Filen/
 
+# Packages
 dnf5 -y config-manager setopt "terra".enabled=true
 terraPackages=(
     "vesktop"
