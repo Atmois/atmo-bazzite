@@ -15,13 +15,8 @@ terraPackages=(
     "feishin"
 )
 
-customPackages=(
-    "https://muse-cdn.com/Muse_Sounds_Manager_x64.rpm"
-)
-
 packages=(
     ${terraPackages[@]}
-    ${customPackages[@]}
     ${fedoraPackages[@]}
 )
 
