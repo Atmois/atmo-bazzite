@@ -13,9 +13,12 @@ I made this so I could install some extra stuff (and remove some of the default 
 ## Changes
 
 ### Extra Packages
+#### [Fedora](https://packages.fedoraproject.org)
+- [MuseScore](https://musescore.org)
+
 #### [Terra](https://terra.fyralabs.com)
 - [Feishin](https://github.com/jeffvli/feishin)
 - [Vesktop](https://vesktop.vencord.dev)
 
-#### Local Packages
-- [Filen](https://filen.io)
+#### External Packages
+- [MuseSounds](https://www.musehub.com/muse-sounds)
