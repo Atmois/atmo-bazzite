@@ -1,7 +1,7 @@
 #!/bin/bash
 set -ouex pipefail
 
-# Packages
+# Packages from repositories
 
 # https://packages.fedoraproject.org
 fedoraPackages=(
@@ -21,3 +21,15 @@ packages=(
 )
 
 dnf install -y ${packages[@]}
+
+# External packages
+
+externalPackages=(
+    "https://muse-cdn.com/Muse_Sounds_Manager_x64.rpm"
+)
+
+rm /opt
+mkdir /opt
+dnf install -y ${externalPackages[@]}
+mv /opt /usr/share/factory
+ln -s /var/opt /opt
