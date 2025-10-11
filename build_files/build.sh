@@ -26,6 +26,7 @@ dnf install -y ${packages[@]}
 
 externalPackages=(
     "https://muse-cdn.com/Muse_Sounds_Manager_x64.rpm"
+    "https://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_x86_64.rpm"
 )
 
 rm /opt
