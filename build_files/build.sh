@@ -38,4 +38,4 @@ rm -rf /opt/*
 rmdir /opt
 ln -s /var/opt /opt
 mkdir -p /usr/lib/tmpfiles.d
-cp /ctx/build_files/opt-packages.conf /usr/lib/tmpfiles.d/opt-packages.conf
+cp /ctx/opt-packages.conf /usr/lib/tmpfiles.d/opt-packages.conf
