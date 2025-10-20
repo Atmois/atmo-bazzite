@@ -6,6 +6,9 @@ set -ouex pipefail
 # https://packages.fedoraproject.org
 fedoraPackages=(
     "musescore"
+    "google-noto-color-emoji-fonts"
+    "google-noto-fonts-all"
+
 )
 
 # https://terra.fyralabs.com
