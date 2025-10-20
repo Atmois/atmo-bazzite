@@ -8,7 +8,17 @@ fedoraPackages=(
     "musescore"
     "google-noto-color-emoji-fonts"
     "google-noto-fonts-all"
-
+    "asciiquarium"
+    "cloc"
+    "hadolint"
+    "hyfetch"
+    "micro"
+    "nmap"
+    "nodejs"
+    "pipx"
+    "zsh"
+    "zsh-autosuggestions"
+    "zsh-syntax-highlighting"
 )
 
 # https://terra.fyralabs.com
@@ -16,6 +26,7 @@ dnf5 -y config-manager setopt "terra".enabled=true
 terraPackages=(
     "vesktop"
     "feishin"
+    "starship"
 )
 
 packages=(
@@ -30,6 +41,7 @@ dnf install -y ${packages[@]}
 externalPackages=(
     "https://muse-cdn.com/Muse_Sounds_Manager_x64.rpm"
     "https://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_x86_64.rpm"
+    "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm"
 )
 
 rm /opt
