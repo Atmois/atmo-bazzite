@@ -15,6 +15,7 @@ I made this so I could install some extra stuff (and remove some of the default 
 ### Extra Packages
 #### [Fedora](https://packages.fedoraproject.org)
 - [MuseScore](https://musescore.org)
+- [Noto Fonts](https://fonts.google.com/noto)
 
 #### [Terra](https://terra.fyralabs.com)
 - [Feishin](https://github.com/jeffvli/feishin)
