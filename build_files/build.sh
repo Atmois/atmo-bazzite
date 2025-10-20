@@ -33,7 +33,12 @@ externalPackages=(
 )
 
 rm /opt
-mkdir /opt
+mkdir -p /opt
 dnf install -y ${externalPackages[@]}
-mv /opt /usr/share/factory
+mkdir -p /usr/share/factory/var/opt
+cp -r /opt/* /usr/share/factory/var/opt/ 2>/dev/null || true
+rm -rf /opt/*
+rmdir /opt
 ln -s /var/opt /opt
+mkdir -p /usr/lib/tmpfiles.d
+cp /ctx/opt-packages.conf /usr/lib/tmpfiles.d/opt-packages.conf
