@@ -21,6 +21,7 @@ fedoraPackages=(
     "zsh-syntax-highlighting"
     "nmap-ncat"
     "telnet"
+    "whois"
 )
 
 # https://terra.fyralabs.com
