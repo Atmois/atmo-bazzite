@@ -5,31 +5,31 @@ set -ouex pipefail
 
 # https://packages.fedoraproject.org
 fedoraPackages=(
-    "musescore"
-    "google-noto-color-emoji-fonts"
-    "google-noto-fonts-all"
     "asciiquarium"
     "cloc"
+    "google-noto-color-emoji-fonts"
+    "google-noto-fonts-all"
     "hadolint"
     "hyfetch"
     "micro"
+    "musescore"
     "nmap"
+    "nmap-ncat"
     "nodejs"
     "pipx"
+    "telnet"
+    "whois"
     "zsh"
     "zsh-autosuggestions"
     "zsh-syntax-highlighting"
-    "nmap-ncat"
-    "telnet"
-    "whois"
 )
 
 # https://terra.fyralabs.com
 dnf5 -y config-manager setopt "terra".enabled=true
 terraPackages=(
-    "vesktop"
     "feishin"
     "starship"
+    "vesktop"
 )
 
 packages=(
@@ -42,9 +42,9 @@ dnf install -y ${packages[@]}
 # External packages
 
 externalPackages=(
-    "https://muse-cdn.com/Muse_Sounds_Manager_x64.rpm"
     "https://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_x86_64.rpm"
     "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm"
+    "https://muse-cdn.com/Muse_Sounds_Manager_x64.rpm"
 )
 
 rm /opt
