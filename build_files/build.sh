@@ -19,6 +19,8 @@ fedoraPackages=(
     "zsh"
     "zsh-autosuggestions"
     "zsh-syntax-highlighting"
+    "nmap-ncat"
+    "telnet"
 )
 
 # https://terra.fyralabs.com

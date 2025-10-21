@@ -27,6 +27,8 @@ I made this so I could install some extra stuff (and remove some of the default 
 - [Zsh](https://www.zsh.org/)
 - [Zsh-Autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 - [Zsh-Syntax-Highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
+- [Netcat](https://nmap.org)
+- [Telnet](https://www.gnu.org/software/inetutils/)
 
 #### [Terra](https://terra.fyralabs.com)
 - [Feishin](https://github.com/jeffvli/feishin)
