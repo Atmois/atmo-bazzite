@@ -7,7 +7,6 @@ set -ouex pipefail
 fedoraPackages=(
     "asciiquarium"
     "blender"
-    "cloc"
     "flatseal"
     "gnome-boxes"
     "google-noto-color-emoji-fonts"
@@ -23,6 +22,7 @@ fedoraPackages=(
     "pavucontrol"
     "pipx"
     "telnet"
+    "tokei"
     "whois"
     "zsh"
     "zsh-autosuggestions"
