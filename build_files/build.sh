@@ -23,6 +23,7 @@ fedoraPackages=(
     "pipx"
     "telnet"
     "tokei"
+    "uv"
     "whois"
     "zsh"
     "zsh-autosuggestions"
