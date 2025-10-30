@@ -30,8 +30,6 @@ I made this so I could install some extra stuff (and remove some of the default 
 - [Telnet](https://www.gnu.org/software/inetutils/)
 - [Tokei](https://github.com/XAMPPRocky/tokei)
 - [UV](https://github.com/astral-sh/uv)
-- [Whois](https://github.com/rfc1036/whois)
-- [Zsh](https://www.zsh.org/)
 - [Zsh-Autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 - [Zsh-Syntax-Highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 

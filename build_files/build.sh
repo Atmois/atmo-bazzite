@@ -22,8 +22,6 @@ fedoraPackages=(
     "telnet"
     "tokei"
     "uv"
-    "whois"
-    "zsh"
     "zsh-autosuggestions"
     "zsh-syntax-highlighting"
 )
