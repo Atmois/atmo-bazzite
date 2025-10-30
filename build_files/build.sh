@@ -46,7 +46,6 @@ packages=(
 # External packages
 externalPackages=(
     "https://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_x86_64.rpm"
-    "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm"
     "https://muse-cdn.com/Muse_Sounds_Manager_x64.rpm"
 )
 
