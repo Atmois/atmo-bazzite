@@ -58,8 +58,8 @@ mkdir -p /opt
 [ -L /usr/local ] && rm -f /usr/local
 mkdir -p /usr/local/bin
 
-# Install external packages (skip all verification for packages without proper digest)
-dnf install -y --nogpgcheck --setopt=localpkg_gpgcheck=0 ${externalPackages[@]}
+# Install external packages
+dnf install -y ${externalPackages[@]}
 
 # Relocate /opt contents to factory path and convert to symlink
 mkdir -p /usr/share/factory/var/opt
