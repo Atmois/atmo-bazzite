@@ -44,21 +44,26 @@ packages=(
 #dnf install -y ${packages[@]}
 
 # External packages
-
 externalPackages=(
     "https://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_x86_64.rpm"
     "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm"
     "https://muse-cdn.com/Muse_Sounds_Manager_x64.rpm"
-
 )
 
-rm /opt
+# Ensure required system paths exist
 mkdir -p /opt
+mkdir -p /usr/local/bin
+
+# Install external packages
 dnf install -y ${externalPackages[@]}
+
+# Relocate /opt contents and set up factory path
 mkdir -p /usr/share/factory/var/opt
 cp -r /opt/* /usr/share/factory/var/opt/ 2>/dev/null || true
 rm -rf /opt/*
 rmdir /opt
 ln -s /var/opt /opt
+
+# Register tmpfiles config
 mkdir -p /usr/lib/tmpfiles.d
 cp /ctx/opt-packages.conf /usr/lib/tmpfiles.d/opt-packages.conf
