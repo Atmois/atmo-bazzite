@@ -48,22 +48,19 @@ externalPackages=(
     "https://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_x86_64.rpm"
     "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm"
     "https://muse-cdn.com/Muse_Sounds_Manager_x64.rpm"
-    "https://github.com/ONLYOFFICE/DesktopEditors/releases/latest/download/onlyoffice-desktopeditors.x86_64.rpm"
 )
 
 # Ensure /opt is a real directory for RPM installation
 if [ -L /opt ]; then
     rm -f /opt
     mkdir -p /opt
-elif [ ! -d /opt ]; then
+else
     mkdir -p /opt
 fi
 
 # Ensure /usr/local is a real directory for Cloudflared
 if [ -L /usr/local ]; then
     rm -f /usr/local
-    mkdir -p /usr/local/bin
-elif [ ! -d /usr/local ]; then
     mkdir -p /usr/local/bin
 else
     mkdir -p /usr/local/bin
