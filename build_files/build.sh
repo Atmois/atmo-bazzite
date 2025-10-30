@@ -58,6 +58,9 @@ elif [ ! -d /opt ]; then
     mkdir -p /opt
 fi
 
+# Ensure /usr/local/bin exists for cloudflared's post-install script
+mkdir -p /usr/local/bin
+
 # Install external packages
 dnf install -y ${externalPackages[@]}
 
