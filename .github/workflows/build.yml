@@ -113,7 +113,7 @@ jobs:
       # Documentation for Rechunk is provided on their github repository at https://github.com/hhd-dev/rechunk
       - name: Run Rechunker
         id: rechunk
-        uses: hhd-dev/rechunk@v1.1.3
+        uses: hhd-dev/rechunk@5fbe1d3a639615d2548d83bc888360de6267b1a2 # v1.2.4
         with:
           rechunk: "ghcr.io/hhd-dev/rechunk:v1.1.2"
           ref: "raw-img"
