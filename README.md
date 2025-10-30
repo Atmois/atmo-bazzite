@@ -48,4 +48,4 @@ I made this so I could install some extra stuff (and remove some of the default 
 - [Cloudflared](https://github.com/cloudflare/cloudflared)
 - [Filen](https://filen.io)
 - [MuseSounds](https://www.musehub.com/muse-sounds)
-- [OnlyOffice](https://www.onlyoffice.com/download-desktop)
+- ~~[OnlyOffice](https://www.onlyoffice.com/download-desktop)~~ Disabled
