@@ -41,7 +41,7 @@ packages=(
     ${fedoraPackages[@]}
 )
 
-dnf install -y ${packages[@]}
+#dnf install -y ${packages[@]}
 
 # External packages
 externalPackages=(
@@ -59,7 +59,7 @@ mkdir -p /opt
 mkdir -p /usr/local/bin
 
 # Install external packages
-dnf install -y ${externalPackages[@]}
+#dnf install -y ${externalPackages[@]}
 
 # Relocate /opt contents to factory path and convert to symlink
 mkdir -p /usr/share/factory/var/opt
