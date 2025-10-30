@@ -51,7 +51,6 @@ externalPackages=(
 )
 
 # Ensure required system paths exist
-mkdir -p /opt
 mkdir -p /usr/local/bin
 
 # Install external packages
