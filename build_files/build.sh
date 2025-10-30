@@ -69,8 +69,8 @@ else
     mkdir -p /usr/local/bin
 fi
 
-# Install external packages
-dnf install -y ${externalPackages[@]}
+# Install external packages 
+dnf install -y --nogpgcheck ${externalPackages[@]}
 
 # Relocate /opt contents and set up factory path
 mkdir -p /usr/share/factory/var/opt
