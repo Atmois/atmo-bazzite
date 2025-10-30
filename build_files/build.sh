@@ -49,12 +49,11 @@ externalPackages=(
     "https://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_x86_64.rpm"
     "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm"
     "https://muse-cdn.com/Muse_Sounds_Manager_x64.rpm"
-    "https://github.com/ONLYOFFICE/DesktopEditors/releases/latest/download/onlyoffice-desktopeditors.x86_64.rpm"
 )
 
 rm /opt
 mkdir -p /opt
-dnf install -y --nogpgcheck ${externalPackages[@]}
+dnf install -y ${externalPackages[@]}
 mkdir -p /usr/share/factory/var/opt
 cp -r /opt/* /usr/share/factory/var/opt/ 2>/dev/null || true
 rm -rf /opt/*
