@@ -69,8 +69,8 @@ else
     mkdir -p /usr/local/bin
 fi
 
-# Install external packages 
-dnf install -y --nogpgcheck ${externalPackages[@]}
+# Install external packages (skip all verification for packages without proper digest)
+dnf install -y --nogpgcheck --setopt=localpkg_gpgcheck=0 ${externalPackages[@]}
 
 # Relocate /opt contents and set up factory path
 mkdir -p /usr/share/factory/var/opt
