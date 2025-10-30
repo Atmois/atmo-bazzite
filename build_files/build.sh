@@ -54,7 +54,7 @@ externalPackages=(
 
 rm /opt
 mkdir -p /opt
-dnf install -y ${externalPackages[@]}
+dnf install -y --nogpgcheck ${externalPackages[@]}
 mkdir -p /usr/share/factory/var/opt
 cp -r /opt/* /usr/share/factory/var/opt/ 2>/dev/null || true
 rm -rf /opt/*
