@@ -42,11 +42,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
-      # This is optional, but if you see that your builds are way too big for the runners, you can enable this by uncommenting the following lines:
-      # - name: Maximize build space
-      #   uses: ublue-os/remove-unwanted-software@517622d6452028f266b7ba4cc9a123b5f58a6b53 # v7
-      #   with:
-      #     remove-codeql: true
+      - name: Maximize build space
+        uses: ublue-os/remove-unwanted-software@517622d6452028f266b7ba4cc9a123b5f58a6b53 # v7
+        with:
+          remove-codeql: true
 
       - name: Mount BTRFS for podman storage
         uses: ublue-os/container-storage-action@main
@@ -60,8 +59,7 @@ jobs:
           # https://linux.die.net/man/1/date
           echo "date=$(date -u +%Y\-%m\-%d\T%H\:%M\:%S\Z)" >> $GITHUB_OUTPUT
 
-      # Image metadata for https://artifacthub.io/ - This is optional but is highly recommended so we all can get a index of all the custom images
-      # The metadata by itself is not going to do anything, you choose if you want your image to be on ArtifactHub or not.
+      # Image metadata for https://artifacthub.io/2
       - name: Image Metadata
         uses: docker/metadata-action@c1e51972afc2121e065aed6d45c65596fe445f3f # v5
         id: metadata
@@ -95,81 +93,56 @@ jobs:
 
       - name: Build Image
         id: build_image
-        uses: redhat-actions/buildah-build@7a95fa7ee0f02d552a32753e7414641a04307056 # v2
-        with:
-          containerfiles: |
-            ./Containerfile
-          # Postfix image name with -custom to make it a little more descriptive
-          # Syntax: https://docs.github.com/en/actions/learn-github-actions/expressions#format
-          image: ${{ env.IMAGE_NAME }}
-          tags: ${{ steps.metadata.outputs.tags }}
-          labels: ${{ steps.metadata.outputs.labels }}
-          oci: false
+        run: |
+          # Build with buildah directly to ensure image is in containers-storage
+          LABELS="${{ steps.metadata.outputs.labels }}"
+          LABEL_ARGS=""
+          for label in $LABELS; do
+            LABEL_ARGS="$LABEL_ARGS --label $label"
+          done
+
+          sudo buildah build \
+            --layers=false \
+            $LABEL_ARGS \
+            --tag raw-img \
+            --file ./Containerfile \
+            .
 
       # Rechunk is a script that we use on Universal Blue to make sure there isnt a single huge layer when your image gets published.
       # This does not make your image faster to download, just provides better resumability and fixes a few errors.
       # Documentation for Rechunk is provided on their github repository at https://github.com/hhd-dev/rechunk
-      # You can enable it by uncommenting the following lines:
-      # - name: Run Rechunker
-      #   id: rechunk
-      #   uses: hhd-dev/rechunk@f153348d8100c1f504dec435460a0d7baf11a9d2 # v1.1.1
-      #   with:
-      #     rechunk: 'ghcr.io/hhd-dev/rechunk:v1.0.1'
-      #     ref: "localhost/${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}"
-      #     prev-ref: "${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}"
-      #     skip_compression: true
-      #     version: ${{ env.CENTOS_VERSION }}
-      #     labels: ${{ steps.metadata.outputs.labels }} # Rechunk strips out all the labels during build, this needs to be reapplied here with newline separator
+      - name: Run Rechunker
+        id: rechunk
+        uses: hhd-dev/rechunk@v1.1.3
+        with:
+          rechunk: "ghcr.io/hhd-dev/rechunk:v1.1.2"
+          ref: "raw-img"
+          prev-ref: "${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}"
+          version: "${{ env.DEFAULT_TAG }}"
+          labels: ${{ steps.metadata.outputs.labels }}
 
-      # This is necessary so that the podman socket can find the rechunked image on its storage
-      # - name: Load in podman and tag
-      #   run: |
-      #     IMAGE=$(podman pull ${{ steps.rechunk.outputs.ref }})
-      #     sudo rm -rf ${{ steps.rechunk.outputs.output }}
-      #     for tag in ${{ steps.metadata.outputs.tags }}; do
-      #       podman tag $IMAGE ${{ env.IMAGE_NAME }}:$tag
-      #     done
+      - name: Install Cosign
+        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        uses: sigstore/cosign-installer@faadad0cce49287aee09b3a48701e75088a2c6ad # v4.0.0
 
       # These `if` statements are so that pull requests for your custom images do not make it publish any packages under your name without you knowing
       # They also check if the runner is on the default branch so that things like the merge queue (if you enable it), are going to work
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3
-        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Push To GHCR
-        uses: redhat-actions/push-to-registry@5ed88d269cf581ea9ef6dd6806d01562096bee9c # v2
-        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
-        id: push
-        env:
-          REGISTRY_USER: ${{ github.actor }}
-          REGISTRY_PASSWORD: ${{ github.token }}
-        with:
-          registry: ${{ env.IMAGE_REGISTRY }}
-          image: ${{ env.IMAGE_NAME }}
-          tags: ${{ steps.metadata.outputs.tags }}
-          username: ${{ env.REGISTRY_USER }}
-          password: ${{ env.REGISTRY_PASSWORD }}
-
-      # This section is optional and only needs to be enabled if you plan on distributing
-      # your project for others to consume. You will need to create a public and private key
-      # using Cosign and save the private key as a repository secret in Github for this workflow
-      # to consume. For more details, review the image signing section of the README.
-      - name: Install Cosign
-        uses: sigstore/cosign-installer@faadad0cce49287aee09b3a48701e75088a2c6ad # v4.0.0
-        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
-
-      - name: Sign container image
+      - name: Push To GHCR and Sign
         if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
         run: |
-          IMAGE_FULL="${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}"
+          echo "${{ secrets.GITHUB_TOKEN }}" | sudo podman login ghcr.io -u ${{ github.actor }} --password-stdin
+
+          # Get the digest for signing
+          DIGEST=$(sudo skopeo inspect --format '{{.Digest}}' ${{ steps.rechunk.outputs.ref }})
+
+          # Push all tags
           for tag in ${{ steps.metadata.outputs.tags }}; do
-            cosign sign -y --key env://COSIGN_PRIVATE_KEY $IMAGE_FULL:$tag
+            dest_image="${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:$tag"
+            sudo skopeo copy ${{ steps.rechunk.outputs.ref }} docker://$dest_image
+            echo "Pushed $dest_image"
           done
+
+          # Sign the image with the digest
+          cosign sign -y --key env://COSIGN_PRIVATE_KEY "${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}@$DIGEST"
         env:
-          TAGS: ${{ steps.push.outputs.digest }}
-          COSIGN_EXPERIMENTAL: false
           COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }}
