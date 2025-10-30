@@ -94,13 +94,20 @@ jobs:
 
       - name: Build Image
         id: build_image
-        uses: redhat-actions/buildah-build@7a95fa7ee0f02d552a32753e7414641a04307056 # v2
-        with:
-          containerfiles: |
-            ./Containerfile
-          image: raw-img
-          labels: ${{ steps.metadata.outputs.labels }}
-          oci: false
+        run: |
+          # Build with buildah directly to ensure image is in containers-storage
+          LABELS="${{ steps.metadata.outputs.labels }}"
+          LABEL_ARGS=""
+          for label in $LABELS; do
+            LABEL_ARGS="$LABEL_ARGS --label $label"
+          done
+
+          sudo buildah build \
+            --layers=false \
+            $LABEL_ARGS \
+            --tag raw-img \
+            --file ./Containerfile \
+            .
 
       # Rechunk is a script that we use on Universal Blue to make sure there isnt a single huge layer when your image gets published.
       # This does not make your image faster to download, just provides better resumability and fixes a few errors.
