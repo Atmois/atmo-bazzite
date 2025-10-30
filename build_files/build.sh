@@ -50,9 +50,6 @@ externalPackages=(
     "https://muse-cdn.com/Muse_Sounds_Manager_x64.rpm"
 )
 
-# Ensure required system paths exist
-mkdir -p /usr/local/bin
-
 # Install external packages
 dnf install -y ${externalPackages[@]}
 
