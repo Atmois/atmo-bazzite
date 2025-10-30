@@ -41,7 +41,7 @@ packages=(
     ${fedoraPackages[@]}
 )
 
-dnf install -y ${packages[@]}
+#dnf install -y ${packages[@]}
 
 # External packages
 
