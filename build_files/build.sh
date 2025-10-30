@@ -49,8 +49,13 @@ externalPackages=(
     "https://muse-cdn.com/Muse_Sounds_Manager_x64.rpm"
 )
 
-# Ensure required system paths exist
-mkdir -p /opt
+# Ensure /opt is a real directory for RPM installation
+if [ -L /opt ]; then
+    rm -f /opt
+    mkdir -p /opt
+elif [ ! -d /opt ]; then
+    mkdir -p /opt
+fi
 
 # Install external packages
 dnf install -y ${externalPackages[@]}
