@@ -19,6 +19,7 @@ fedoraPackages=(
     "nodejs"
     "pavucontrol"
     "php"
+    "python3-tkinter"
     "telnet"
     "tokei"
     "uv"
