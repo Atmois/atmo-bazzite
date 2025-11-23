@@ -1,7 +1,6 @@
 ---
 name: Build container image
 on:
-  pull_request:
   schedule:
     - cron: '05 3 * * *'  # 3:05am UTC everyday
   push:
