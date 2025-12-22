@@ -9,6 +9,7 @@ fedoraPackages=(
     "blender"
     "composer"
     "golang"
+    "golang-honnef-tools"
     "hadolint"
     "hyfetch"
     "mediawriter"
