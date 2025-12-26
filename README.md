@@ -18,7 +18,6 @@ I made this so I could install some extra stuff (and remove some of the default 
 - [Blender](https://www.blender.org/)
 - [Composer](https://getcomposer.org/)
 - [Golang](https://golang.org/)
-- [Golang Honnef Tools](https://staticcheck.dev/docs/getting-started/)
 - [Hadolint](https://github.com/hadolint/hadolint)
 - [Hyfetch](https://github.com/hykilpikonna/hyfetch)
 - [Micro](https://micro-editor.github.io/)
