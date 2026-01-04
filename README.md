@@ -26,7 +26,7 @@ I made this so I could install some extra stuff (and remove some of the default 
 - [Netcat](https://nmap.org)
 - [Nmap](https://nmap.org/)
 - [Nodejs](https://nodejs.org/)
-- [PHP](https://www.php.net/)
+- [PHP](https://php.net/)
 - [Python3 TkInter](https://wiki.python.org/moin/TkInter)
 - [Telnet](https://www.gnu.org/software/inetutils/)
 - [Tokei](https://github.com/XAMPPRocky/tokei)
