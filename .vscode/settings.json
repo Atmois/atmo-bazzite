@@ -1,0 +1,6 @@
+{
+  "files.associations": {
+    "Containerfile.gnome": "dockerfile",
+    "Containerfile.kde": "dockerfile"
+  }
+}

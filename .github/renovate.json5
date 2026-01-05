@@ -6,7 +6,7 @@
   "rebaseWhen": "never",
   "packageRules": [
     {
-      "matchFileNames": ["Containerfile"],
+      "matchFileNames": ["Containerfile.kde", "Containerfile.gnome"],
       "matchDatasources": ["docker"],
       "pinDigests": false
     },
