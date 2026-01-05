@@ -3,7 +3,7 @@ FROM scratch AS ctx
 COPY build_files /
 
 # Base Image - KDE variant
-FROM ghcr.io/ublue-os/bazzite-dx-nvidia:stable
+FROM ghcr.io/ublue-os/bazzite-dx-nvidia:stable@sha256:4f811fdc52e4628f3411cb712f5a9daeb72bfd78e899b559d6d6dab76bc51c48
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
