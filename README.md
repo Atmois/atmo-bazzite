@@ -7,9 +7,13 @@ I made this so I could install some extra stuff from bazzite-dx. I won't take PR
 
 ## Available Variants
 
+As I do not build my own ISO files you will need to install Bazzite first and then rebase to this image. **Please ensure you have chosen the variant using the same DE you plan to use as well as the same hardware options.**
+
 This repo builds two variants:
 - **GNOME** (`latest-gnome`): Based on `ghcr.io/ublue-os/bazzite-dx-nvidia-gnome:stable`
-- **KDE** (`latest-kde`): Based on `ghcr.io/ublue-os/bazzite-dx-nvidia:stable`
+  - You can rebase to the image using `rpm-ostree rebase ostree-image-signed:docker://ghcr.io/atmois/atmo-bazzite:latest-gnome`
+- **KDE Plasma** (`latest-kde`): Based on `ghcr.io/ublue-os/bazzite-dx-nvidia:stable`
+  - You can rebase to the image using `rpm-ostree rebase ostree-image-signed:docker://ghcr.io/atmois/atmo-bazzite:latest-kde`
 
 Both variants use the same build script and include all the packages listed below.
 
