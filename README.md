@@ -26,6 +26,7 @@ Both variants use the same build script and include all the packages listed belo
 - [Blender](https://www.blender.org/)
 - [Composer](https://getcomposer.org/)
 - [Golang](https://golang.org/)
+- [Graphviz](https://gparted.org)
 - [Hadolint](https://github.com/hadolint/hadolint)
 - [Hyfetch](https://github.com/hykilpikonna/hyfetch)
 - [Micro](https://micro-editor.github.io/)
