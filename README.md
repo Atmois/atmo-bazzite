@@ -3,11 +3,11 @@
 [![Build container image](https://github.com/Atmois/atmo-bazzite/actions/workflows/build.yml/badge.svg)](https://github.com/Atmois/atmo-bazzite/actions/workflows/build.yml)
 
 
-I made this so I could install some extra stuff from bazzite-dx. I won't take PRs or anything for it as its just for my own personal use. Some of the changes I have done are listed below. I would personally not reccommend you use this for your own setup unless you know what you are doing.
+I made this so I could install and remove some extra stuff from bazzite-dx. I won't take PRs or anything for it as its just for my own personal use. Some of the changes I have done are listed below. I would personally not reccommend you use this for your own setup unless you know what you are doing.
 
 ## Available Variants
 
-As I do not build my own ISO files you will need to install Bazzite first and then rebase to this image. **Please ensure you have chosen the variant using the same DE you plan to use as well as the same hardware options.**
+As I do not build my own ISO files you will need to install Bazzite first and then rebase to this image. **Please ensure you have chosen the variant using the same DE you plan to use as well as the correct hardware options.**
 
 This repo builds two variants:
 - **GNOME** (`latest-gnome`): Based on `ghcr.io/ublue-os/bazzite-dx-nvidia-gnome:stable`
@@ -57,3 +57,7 @@ Both variants use the same build script and include all the packages listed belo
 - [Filen](https://filen.io)
 - [MuseSounds](https://www.musehub.com/muse-sounds)
 - [Trillium Notes](https://triliumnotes.org)
+
+### Removed Packages
+- Lutris
+- Waydroid
