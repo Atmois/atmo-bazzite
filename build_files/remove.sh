@@ -7,3 +7,5 @@ packages=(
 )
 
 dnf remove -y ${packages[@]}
+
+dnf clean all
