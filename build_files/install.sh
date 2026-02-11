@@ -15,7 +15,6 @@ fedoraPackages=(
     "mediawriter"
     "micro"
     "musescore"
-    "nfs-utils"
     "nmap"
     "nmap-ncat"
     "nodejs"

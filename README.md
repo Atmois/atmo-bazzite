@@ -37,7 +37,6 @@ Both variants use the same build script and include all the packages listed belo
 - [MediaWriter](https://github.com/FedoraQt/MediaWriter)
 - [MuseScore](https://musescore.org)
 - [Netcat](https://nmap.org)
-- [nfs-utils](https://linux-nfs.org)
 - [Nmap](https://nmap.org/)
 - [Nodejs](https://nodejs.org/)
 - [PHP](https://php.net/)
