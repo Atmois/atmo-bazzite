@@ -41,6 +41,7 @@ Both variants use the same build script and include all the packages listed belo
 - [Nodejs](https://nodejs.org/)
 - [PHP](https://php.net/)
 - [Python3 TkInter](https://wiki.python.org/moin/TkInter)
+- [Samba](https://www.samba.org/)
 - [Telnet](https://www.gnu.org/software/inetutils/)
 - [Tokei](https://github.com/XAMPPRocky/tokei)
 - [UV](https://github.com/astral-sh/uv)

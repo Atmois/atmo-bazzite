@@ -21,6 +21,7 @@ fedoraPackages=(
     "pavucontrol"
     "php"
     "python3-tkinter"
+    "samba"
     "telnet"
     "tokei"
     "uv"
