@@ -1,6 +1,7 @@
 {
   "files.associations": {
     "Containerfile.gnome": "dockerfile",
-    "Containerfile.kde": "dockerfile"
+    "Containerfile.kde": "dockerfile",
+    "Containerfile.swayfx": "dockerfile"
   }
 }

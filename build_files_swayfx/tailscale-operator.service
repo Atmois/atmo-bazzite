@@ -1,0 +1,11 @@
+[Unit]
+Description=Set Tailscale operator on login
+After=tailscaled.service multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/tailscale set --operator=atmois
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
