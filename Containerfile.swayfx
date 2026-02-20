@@ -1,6 +1,6 @@
 # Allow build scripts to be referenced without being copied into the final image
 FROM scratch AS ctx
-COPY sway_build_files /
+COPY build_files_swayfx /
 
 # Base Image
 FROM ghcr.io/ublue-os/bazzite-dx-nvidia-gnome:stable
