@@ -3,4 +3,4 @@ set -ouex pipefail
 
 bash /ctx/remove.sh
 bash /ctx/install.sh
-bash /ctx/extra.sh
+bash /ctx/setup.sh
