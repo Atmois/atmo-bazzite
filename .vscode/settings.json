@@ -2,6 +2,8 @@
   "files.associations": {
     "Containerfile.gnome": "dockerfile",
     "Containerfile.kde": "dockerfile",
-    "Containerfile.swayfx": "dockerfile"
-  }
+    "Containerfile.swayfx": "dockerfile",
+    "build_files_swayfx/files/sway-config": "i3"
+  },
+  "css.lint.unknownAtRules": "ignore"
 }
