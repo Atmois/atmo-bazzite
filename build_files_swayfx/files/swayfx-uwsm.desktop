@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=SwayFX UWSM
+Comment=SwayFX compositor managed by UWSM
+Exec=uwsm start swayfx
+Type=Application
+DesktopNames=sway
