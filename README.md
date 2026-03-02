@@ -12,22 +12,25 @@ As I do not build my own ISO files you will need to install Bazzite first and th
 This repo builds two variants:
 - **GNOME** (`latest-gnome`): Based on `ghcr.io/ublue-os/bazzite-dx-nvidia-gnome:stable`
   - You can rebase to the image using `rpm-ostree rebase ostree-image-signed:docker://ghcr.io/atmois/atmo-bazzite:latest-gnome`
+
 - **KDE Plasma** (`latest-kde`): Based on `ghcr.io/ublue-os/bazzite-dx-nvidia:stable`
   - You can rebase to the image using `rpm-ostree rebase ostree-image-signed:docker://ghcr.io/atmois/atmo-bazzite:latest-kde`
+> This image is no longer built and will be severly out of date. Do not use this image.
 
-Both variants use the same build script and include all the packages listed below.
+- **SwayFX** (`latest-swayfx`): Based on `ghcr.io/ublue-os/bazzite-dx-swayfx:stable`
+  - You can rebase to the image using `rpm-ostree rebase ostree-image-signed:docker://ghcr.io/atmois/atmo-bazzite:latest-swayfx`
+> As this image is a barebones form of the GNOME image, I reccomend rebasing from a GNOME image.
 
 ### Sources
 
 - [Bazzite](https://bazzite.gg)
 - [UniversalBlue](https://universal-blue.org)
 
-## Changes
+## Changes on All Images
 
 ### Extra Packages
 #### [Fedora](https://packages.fedoraproject.org)
 - [Asciiquarium](https://robobunny.com/projects/asciiquarium/html/)
-- [Blender](https://www.blender.org/)
 - [Composer](https://getcomposer.org/)
 - [Golang](https://golang.org/)
 - [Graphviz](https://gparted.org)
@@ -35,7 +38,6 @@ Both variants use the same build script and include all the packages listed belo
 - [Hyfetch](https://github.com/hykilpikonna/hyfetch)
 - [Micro](https://micro-editor.github.io/)
 - [MediaWriter](https://github.com/FedoraQt/MediaWriter)
-- [MuseScore](https://musescore.org)
 - [Netcat](https://nmap.org)
 - [Nmap](https://nmap.org/)
 - [Nodejs](https://nodejs.org/)
@@ -58,7 +60,6 @@ Both variants use the same build script and include all the packages listed belo
 #### External Packages
 - [Cloudflared](https://github.com/cloudflare/cloudflared)
 - [Filen](https://filen.io)
-- [MuseSounds](https://www.musehub.com/muse-sounds)
 - [Trillium Notes](https://triliumnotes.org)
 
 ### Removed Packages
