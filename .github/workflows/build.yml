@@ -34,9 +34,9 @@ jobs:
           # - name: kde
           #   containerfile: Containerfile.kde
           #   base_image: ghcr.io/ublue-os/bazzite-dx-nvidia:stable
-          - name: swayfx
-            containerfile: Containerfile.swayfx
-            base_image: ghcr.io/ublue-os/bazzite-dx-nvidia-gnome:stable
+          # - name: swayfx
+          #   containerfile: Containerfile.swayfx
+          #   base_image: ghcr.io/ublue-os/bazzite-dx-nvidia-gnome:stable
 
     permissions:
       contents: read
