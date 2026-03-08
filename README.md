@@ -15,7 +15,6 @@ This repo builds three variants:
 
 - **KDE Plasma** (`latest-kde`): Based on `ghcr.io/ublue-os/bazzite-dx-nvidia:stable`
   - You can rebase to the image using `rpm-ostree rebase ostree-image-signed:docker://ghcr.io/atmois/atmo-bazzite:latest-kde`
-> This image is no longer built and will be severly out of date. Do not use this image.
 
 - **SwayFX** (`latest-swayfx`): Based on `ghcr.io/ublue-os/bazzite-dx-nvidia-gnome:stable`
   - You can rebase to the image using `rpm-ostree rebase ostree-image-signed:docker://ghcr.io/atmois/atmo-bazzite:latest-swayfx`
