@@ -60,7 +60,51 @@ This repo builds three variants:
 - [Cloudflared](https://github.com/cloudflare/cloudflared)
 - [Filen](https://filen.io)
 - [Trillium Notes](https://triliumnotes.org)
+- [Vivaldi](https://vivaldi.com/)
 
 ### Removed Packages
 - Lutris
 - Waydroid
+
+## SwayFX Image
+
+### Extra Packages
+#### [Fedora](https://packages.fedoraproject.org)
+- [Adwaita Fonts All](https://gitlab.gnome.org/GNOME/adwaita-fonts)
+- [Adwaita Icon Theme](https://gitlab.gnome.org/GNOME/adwaita-icon-theme)
+- [Blueman](https://github.com/blueman-project/blueman)
+- [Grim](https://gitlab.freedesktop.org/emersion/grim)
+- [Gvfs](https://gitlab.gnome.org/GNOME/gvfs)
+- [Gvfs Mtp](https://gitlab.gnome.org/GNOME/gvfs)
+- [Network Manager Applet](https://gitlab.gnome.org/GNOME/network-manager-applet)
+- [Openssh Askpass](https://www.openssh.com/)
+- [Sddm](https://github.com/sddm/sddm)
+- [Slurp](https://github.com/emersion/slurp)
+- [Swayidle](https://github.com/swaywm/swayidle)
+- [SwayNotificationCenter](https://github.com/ErikReider/SwayNotificationCenter)
+- [Thunar Volman](https://gitlab.xfce.org/xfce/thunar-volman)
+- [Tumbler](https://gitlab.xfce.org/xfce/tumbler)
+- [Ulauncher](https://ulauncher.io/)
+- [Waybar](https://github.com/Alexays/Waybar)
+- [Wl Clipboard](https://github.com/bugaevc/wl-clipboard)
+- [Xdg Desktop Portal Gtk](https://github.com/flatpak/xdg-desktop-portal-gtk)
+- [Xdg Desktop Portal Wlr](https://github.com/emersion/xdg-desktop-portal-wlr)
+- [Xfce Polkit](https://github.com/ncopa/xfce-polkit)
+
+#### [Terra](https://terra.fyralabs.com)
+- [nwg-look](https://github.com/nwg-piotr/nwg-look)
+- [SwayFX](https://github.com/swaywm/swayfx)
+- [Swaylock Effects](https://github.com/mortie/swaylock-effects)
+
+#### External Packages
+- [SwayOSD](https://github.com/ErikReider/SwayOSD) from [erikreider/swayosd on COPR](https://copr.fedorainfracloud.org/coprs/erikreider/swayosd)
+- [UWSM](https://github.com/Vladimir-csp/uwsm) from [solopasha/hyprland on COPR](https://copr.fedorainfracloud.org/coprs/solopasha/hyprland/)
+
+### Removed Packages
+
+
+### Preserved Packages
+- [Gnome Disk Utility](https://gitlab.gnome.org/GNOME/gnome-disk-utility)
+- [gnome-keyring](https://gitlab.gnome.org/GNOME/gnome-keyring)
+- [gnome-keyring-pam](https://gitlab.gnome.org/GNOME/gnome-keyring)
+- [pinentry-gnome3](https://www.gnupg.org/aegypten)

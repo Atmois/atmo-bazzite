@@ -48,6 +48,7 @@ dnf install -y ${packages[@]}
 externalPackages=(
     "https://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_x86_64.rpm"
     "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm"
+    "https://downloads.vivaldi.com/stable/vivaldi-stable.x86_64.rpm"
     "$(curl -s https://api.github.com/repos/TriliumNext/Trilium/releases/latest | grep -oP '"browser_download_url": "\K[^"]*linux-x64\.rpm')"
 )
 
