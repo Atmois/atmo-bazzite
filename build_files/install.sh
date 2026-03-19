@@ -12,6 +12,7 @@ fedoraPackages=(
     "hadolint"
     "hyfetch"
     "mediawriter"
+    "memtest86+"
     "micro"
     "nmap"
     "nmap-ncat"
