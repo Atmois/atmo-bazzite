@@ -73,3 +73,4 @@ ln -s /var/opt /opt
 # Register tmpfiles config
 mkdir -p /usr/lib/tmpfiles.d
 cp /ctx/opt-packages.conf /usr/lib/tmpfiles.d/opt-packages.conf
+echo 'R! /var/opt/vivaldi' >> /usr/lib/tmpfiles.d/opt-packages.conf
