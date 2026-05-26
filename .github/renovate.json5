@@ -16,7 +16,7 @@
       "matchFileNames": [".github/workflows/**.yaml", ".github/workflows/**.yml"],
     },
     {
-      "matchFileNames": ["Containerfile.kde", "Containerfile.gnome", "Containerfile.swayfx"],
+      "matchFileNames": ["Containerfile.kde", "Containerfile.gnome"],
       "matchDatasources": ["docker"],
       "pinDigests": false
     }
