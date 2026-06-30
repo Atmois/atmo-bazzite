@@ -28,23 +28,15 @@ This repo builds three variants:
 - [Asciiquarium](https://robobunny.com/projects/asciiquarium/html/)
 - [Composer](https://getcomposer.org/)
 - [Golang](https://golang.org/)
-- [Graphviz](https://gparted.org)
 - [Hadolint](https://github.com/hadolint/hadolint)
 - [Hyfetch](https://github.com/hykilpikonna/hyfetch)
 - [MediaWriter](https://github.com/FedoraQt/MediaWriter)
-- [memtest86+](https://www.memtest86.com/)
 - [Micro](https://micro-editor.github.io/)
 - [Netcat](https://nmap.org)
 - [Nmap](https://nmap.org/)
 - [Nodejs](https://nodejs.org/)
 - [PHP](https://php.net/)
 - [Telnet](https://www.gnu.org/software/inetutils/)
-- [Thunar](https://docs.xfce.org/xfce/thunar)
-- [Thunar Archive Plugin](https://docs.xfce.org/xfce/thunar/archive)
-- [Thunar Media Tags Plugin](https://docs.xfce.org/xfce/thunar/media-tags)
-- [Thunar VCS Plugin](https://docs.xfce.org/xfce/thunar/thunar-vcs-plugin)
-- [Tokei](https://github.com/XAMPPRocky/tokei)
-- [UV](https://github.com/astral-sh/uv)
 - [Zsh-Autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 - [Zsh-Syntax-Highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 
@@ -61,4 +53,3 @@ This repo builds three variants:
 
 ### Removed Packages
 - Lutris
-- Waydroid
