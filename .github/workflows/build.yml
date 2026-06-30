@@ -1,8 +1,7 @@
----
 name: Build container image
 on:
   schedule:
-    - cron: '05 3 * * *'  # 3:05am UTC everyday
+    - cron: '35 3 * * *'  # 3:35am UTC everyday
   push:
     paths-ignore:
       - '**/README.md'
@@ -12,7 +11,7 @@ env:
   IMAGE_REGISTRY: "ghcr.io/${{ github.repository_owner }}"  # do not edit
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}-${{ inputs.brand_name}}-${{ inputs.stream_name }}
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}-${{ inputs.brand_name }}-${{ inputs.stream_name }}
   cancel-in-progress: true
 
 jobs:
@@ -54,7 +53,9 @@ jobs:
       - name: Image Name
         id: image-name
         run: |
-          IMAGE_NAME=$(just image_name)
+          # Appends the variant name
+          BASE_NAME=$(just image_name)
+          IMAGE_NAME="${BASE_NAME}-${{ matrix.variant.name }}"
 
           echo "IMAGE_NAME=${IMAGE_NAME}" >> $GITHUB_ENV
 
@@ -70,6 +71,10 @@ jobs:
           # Lowercase the image uri https://github.com/macbre/push-to-ghcr/issues/12
           echo "IMAGE_REGISTRY=${IMAGE_REGISTRY,,}" >> ${GITHUB_ENV}
           echo "IMAGE_NAME=${IMAGE_NAME,,}" >> ${GITHUB_ENV}
+
+          # Pass DE matrix properties to environment
+          echo "CONTAINERFILE=${{ matrix.variant.containerfile }}" >> ${GITHUB_ENV}
+          echo "BASE_IMAGE=${{ matrix.variant.base_image }}" >> ${GITHUB_ENV}
 
       # This actually builds the container image
       - name: Build Image
