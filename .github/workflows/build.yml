@@ -9,15 +9,10 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE_DESC: "Atmois's Custom Bazzite Image"
-  IMAGE_KEYWORDS: "bootc,ublue,universal-blue,bazzite"
-  IMAGE_LOGO_URL: "https://avatars.githubusercontent.com/u/130537361?s=200&v=4"  # Put your own image here for a fancy profile on https://artifacthub.io/!
-  IMAGE_NAME: "${{ github.event.repository.name }}"  # output image name, usually same as repo name
   IMAGE_REGISTRY: "ghcr.io/${{ github.repository_owner }}"  # do not edit
-  DEFAULT_TAG: "latest"
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}-${{ inputs.brand_name}}-${{ inputs.stream_name }}
   cancel-in-progress: true
 
 jobs:
@@ -41,140 +36,130 @@ jobs:
       id-token: write
 
     steps:
-      - name: Prepare environment
-        run: |
-          # Lowercase the image uri
-          echo "IMAGE_REGISTRY=${IMAGE_REGISTRY,,}" >> "${GITHUB_ENV}"
-          echo "IMAGE_NAME=${IMAGE_NAME,,}" >> "${GITHUB_ENV}"
-          echo "VARIANT_NAME=${{ matrix.variant.name }}" >> "${GITHUB_ENV}"
-
       # These stage versions are pinned by https://github.com/renovatebot/renovate
       - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
 
-      # You only use this action if the container-storage-action proves to be unreliable, you don't need to enable both
-      # This is optional, but if you see that your builds are way too big for the runners, you will need to enable this if you wish to use the rechunker.
-      # You can enable this by uncommenting the following lines:
-      # - name: Maximize build space
-      #   uses: ublue-os/remove-unwanted-software@695eb75bc387dbcd9685a8e72d23439d8686cba6
-      #   with:
-      #     remove-codeql: true
+      - name: Maximize build space
+        uses: ublue-os/remove-unwanted-software@695eb75bc387dbcd9685a8e72d23439d8686cba6
 
-      - name: Mount BTRFS for podman storage
-        id: container-storage-action
-        uses: ublue-os/container-storage-action@4d41781c2d4394275fec1397a244a74ea4fbc08c
+      - name: Install just
+        uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3 #v4.0.0
 
-        # Fallback to the remove-unwanted-software-action if github doesn't allocate enough space
-        # See: https://github.com/ublue-os/container-storage-action/pull/11
-        continue-on-error: true
-        with:
-          target-dir: /var/lib/containers
-          mount-opts: compress-force=zstd:2
-
-      - name: Get current date
-        id: date
+      - name: Check Just Syntax
+        shell: bash
         run: |
-          # This generates a timestamp like what is defined on the ArtifactHub documentation
-          # E.G: 2022-02-08T15:38:15Z'
-          # https://artifacthub.io/docs/topics/repositories/container-images/
-          # https://linux.die.net/man/1/date
-          echo "date=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_OUTPUT"
+          just check
 
-      # Image metadata for https://artifacthub.io/ - This is optional but is highly recommended so we all can get a index of all the custom images
-      # The metadata by itself is not going to do anything, you choose if you want your image to be on ArtifactHub or not.
-      - name: Image Metadata
-        uses: docker/metadata-action@030e881283bb7a6894de51c315a6bfe6a94e05cf # v6
-        id: metadata
-        with:
-          # This generates all the tags for your image, you can add custom tags here too!
-          # Default tags are "$DEFAULT_TAG" and "$DEFAULT_TAG.$date".
-          tags: |
-            type=raw,value=${{ env.DEFAULT_TAG }}-${{ matrix.variant.name }}
-            type=raw,value=${{ env.DEFAULT_TAG }}-${{ matrix.variant.name }}.{{date 'YYYYMMDD'}}
-            type=raw,value={{date 'YYYYMMDD'}}-${{ matrix.variant.name }}
-            type=sha,enable=${{ github.event_name == 'pull_request' }},suffix=-${{ matrix.variant.name }}
-            type=ref,event=pr,suffix=-${{ matrix.variant.name }}
-          labels: |
-            io.artifacthub.package.readme-url=https://raw.githubusercontent.com/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}/${{ github.sha }}/README.md
-            org.opencontainers.image.created=${{ steps.date.outputs.date }}
-            org.opencontainers.image.description=${{ env.IMAGE_DESC }} (${{ matrix.variant.name }})
-            org.opencontainers.image.documentation=https://raw.githubusercontent.com/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}/${{ github.sha }}/README.md
-            org.opencontainers.image.source=https://github.com/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}/blob/${{ github.sha }}/${{ matrix.variant.containerfile }}
-            org.opencontainers.image.title=${{ env.IMAGE_NAME }}-${{ matrix.variant.name }}
-            org.opencontainers.image.url=https://github.com/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}/tree/${{ github.sha }}
-            org.opencontainers.image.vendor=${{ github.repository_owner }}
-            org.opencontainers.image.version=${{ env.DEFAULT_TAG }}-${{ matrix.variant.name }}.{{date 'YYYYMMDD'}}
-            io.artifacthub.package.deprecated=false
-            io.artifacthub.package.keywords=${{ env.IMAGE_KEYWORDS }}
-            io.artifacthub.package.license=Apache-2.0
-            io.artifacthub.package.logo-url=${{ env.IMAGE_LOGO_URL }}
-            io.artifacthub.package.prerelease=false
-            containers.bootc=1
-          sep-tags: " "
+      - name: Image Name
+        id: image-name
+        run: |
+          IMAGE_NAME=$(just image_name)
 
+          echo "IMAGE_NAME=${IMAGE_NAME}" >> $GITHUB_ENV
+
+      - name: Default Tag
+        id: gen-default-tag
+        run: |
+          DEFAULT_TAG=$(just generate-default-tag)
+
+          echo "DEFAULT_TAG=${DEFAULT_TAG}" >> $GITHUB_ENV
+
+      - name: Prepare environment
+        run: |
+          # Lowercase the image uri https://github.com/macbre/push-to-ghcr/issues/12
+          echo "IMAGE_REGISTRY=${IMAGE_REGISTRY,,}" >> ${GITHUB_ENV}
+          echo "IMAGE_NAME=${IMAGE_NAME,,}" >> ${GITHUB_ENV}
+
+      # This actually builds the container image
       - name: Build Image
-        id: build
+        id: build-image
         run: |
-          sudo buildah build \
-            --storage-driver=overlay \
-            --format=docker \
-            --file ./${{ matrix.variant.containerfile }} \
-            --tag ${IMAGE_NAME}:${DEFAULT_TAG}-${{ matrix.variant.name }} \
-            .
+          sudo -E $(command -v just) build \
+            ${IMAGE_NAME} \
+            ${DEFAULT_TAG}
 
-      # Rechunk is a script that we use on Universal Blue to make sure there isnt a single huge layer when your image gets published.
-      # This does not make your image faster to download, just provides better resumability and fixes a few errors.
-      # Documentation for Rechunk is provided on their github repository at https://github.com/hhd-dev/rechunk
-      # You can enable this by uncommenting the following lines, ensure you also uncomment the "Maximize build space" step:
-      - name: Run Rechunker
+      # This is optional, this provides smaller delta updates
+      - name: Rechunk with rpm-ostree
         id: rechunk
-        uses: hhd-dev/rechunk@5fbe1d3a639615d2548d83bc888360de6267b1a2 # v1.2.4
-        with:
-          rechunk: "ghcr.io/hhd-dev/rechunk:v1.2.4"
-          ref: "${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}-${{ matrix.variant.name }}"
-          prev-ref: "${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}-${{ matrix.variant.name }}"
-          version: "${{ env.DEFAULT_TAG }}-${{ matrix.variant.name }}"
-          labels: ${{ steps.metadata.outputs.labels }}
+        run: |
+          sudo -E $(command -v just) ostree-rechunk \
+            ${IMAGE_NAME} \
+            ${DEFAULT_TAG}
+
+      # If you are feeling adventurous, use the new distro agnostic rechunker
+      # https://github.com/coreos/chunkah
+      # You can delete the Rechunk with rpm-ostree portion then if you use this
+      #- name: Rechunk with Chunkah
+      #  id: rechunk
+      #  run: |
+      #    sudo -E $(command -v just) rechunk \
+      #      ${IMAGE_NAME} \
+      #      ${DEFAULT_TAG}
+
+      - name: Generate Build Tags
+        id: gen-build-tags
+        run: |
+          alias_tags="$(just generate-build-tags \
+                        ${IMAGE_NAME} \
+                        ${DEFAULT_TAG})"
+
+          echo "Tags for this Action..."
+          echo "${alias_tags}"
+          echo "alias_tags=${alias_tags}" >> $GITHUB_OUTPUT
+
+      - name: Tag Image
+        id: tag-images
+        env:
+          ALIAS_TAGS: ${{ steps.gen-build-tags.outputs.alias_tags }}
+        run: |
+          sudo -E $(command -v just) tag-images \
+            "${IMAGE_NAME}" \
+            "${DEFAULT_TAG}" \
+            "${ALIAS_TAGS}"
 
       # These `if` statements are so that pull requests for your custom images do not make it publish any packages under your name without you knowing
       # They also check if the runner is on the default branch so that things like the merge queue (if you enable it), are going to work
       - name: Login to GitHub Container Registry
+        uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee # v4.2.0
         if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | sudo skopeo login --username ${{ github.actor }} --password-stdin ghcr.io
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push To GHCR
         if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
-        id: push
+        id: push-image
+        env:
+          ALIAS_TAGS: ${{ steps.gen-build-tags.outputs.alias_tags }}
         run: |
-          IMAGE_REF="${{ steps.rechunk.outputs.ref || format('containers-storage:localhost/{0}:{1}-{2}', env.IMAGE_NAME, env.DEFAULT_TAG, matrix.variant.name) }}"
-
-          DIGEST=$(sudo skopeo inspect --format '{{.Digest}}' "$IMAGE_REF")
-          echo "digest=$DIGEST" >> "$GITHUB_OUTPUT"
-
-          for tag in ${{ steps.metadata.outputs.tags }}; do
-            dest_image="${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:$tag"
-            sudo skopeo copy "$IMAGE_REF" docker://$dest_image
-            echo "Pushed $dest_image"
+          set -euox pipefail
+          for tag in ${ALIAS_TAGS}; do
+            sudo -E podman push --digestfile=/tmp/digestfile ${IMAGE_NAME}:${tag} ${IMAGE_REGISTRY}/${IMAGE_NAME}:${tag}
           done
+
+          digest=$(< /tmp/digestfile)
+
+          echo "digest=${digest}" >> $GITHUB_OUTPUT
 
       # This section is optional and only needs to be enabled if you plan on distributing
       # your project for others to consume. You will need to create a public and private key
       # using Cosign and save the private key as a repository secret in Github for this workflow
       # to consume. For more details, review the image signing section of the README.
       - name: Install Cosign
-        uses: sigstore/cosign-installer@faadad0cce49287aee09b3a48701e75088a2c6ad # v4.0.0
+        uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
         if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        # https://github.com/containers/container-libs/issues/388
+        with:
+          cosign-release: 'v2.6.3'
 
       - name: Sign container image
+        id: sign-image
         if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
-        run: |
-          IMAGE_FULL="${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}"
-          for tag in ${{ steps.metadata.outputs.tags }}; do
-            cosign sign -y --key env://COSIGN_PRIVATE_KEY $IMAGE_FULL:$tag
-          done
         env:
-          TAGS: ${{ steps.push.outputs.digest }}
           COSIGN_EXPERIMENTAL: false
           COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }}
-          COSIGN_REGISTRY_USERNAME: ${{ github.actor }}
-          COSIGN_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          DIGEST: ${{ steps.push-image.outputs.digest }}
+        run: |
+          cosign sign -y --key env://COSIGN_PRIVATE_KEY ${IMAGE_REGISTRY}/${IMAGE_NAME}@${DIGEST}
