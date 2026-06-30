@@ -79,6 +79,9 @@ jobs:
       - name: Build Image
         id: build-image
         run: |
+          # Point to specific containerfile
+          ln -sf "${CONTAINERFILE}" Containerfile
+
           sudo -E $(command -v just) build \
             ${IMAGE_NAME} \
             ${DEFAULT_TAG}
