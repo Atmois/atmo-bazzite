@@ -52,4 +52,5 @@ This repo builds three variants:
 - [Vivaldi](https://vivaldi.com/)
 
 ### Removed Packages
+- GNOME Disk Utility
 - Lutris

@@ -2,6 +2,7 @@
 set -ouex pipefail
 
 packages=(
+    "gnome-disk-utility"
     "lutris"
 )
 
