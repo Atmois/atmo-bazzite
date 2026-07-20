@@ -22,9 +22,9 @@ jobs:
       fail-fast: false
       matrix:
         variant:
-          - name: gnome
-            containerfile: Containerfile.gnome
-            base_image: ghcr.io/ublue-os/bazzite-dx-nvidia-gnome:stable
+          # - name: gnome
+          #   containerfile: Containerfile.gnome
+          #   base_image: ghcr.io/ublue-os/bazzite-dx-nvidia-gnome:stable
           - name: kde
             containerfile: Containerfile.kde
             base_image: ghcr.io/ublue-os/bazzite-dx-nvidia:stable
