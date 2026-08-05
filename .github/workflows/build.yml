@@ -34,8 +34,8 @@ jobs:
       packages: write
       id-token: write
 
-    # These stage versions are pinned by https://github.com/renovatebot/renovate
     steps:
+      # These stage versions are pinned by https://github.com/renovatebot/renovate
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
@@ -75,16 +75,6 @@ jobs:
           echo "CONTAINERFILE=${{ matrix.variant.containerfile }}" >> ${GITHUB_ENV}
           echo "BASE_IMAGE=${{ matrix.variant.base_image }}" >> ${GITHUB_ENV}
 
-      # Cache dnf package downloads between runs so unchanged packages
-      - name: Cache DNF packages
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: |
-            /var/cache/dnf-podman-build
-          key: dnf-cache-${{ matrix.variant.name }}-${{ hashFiles('Containerfile*', 'build_files/**') }}
-          restore-keys: |
-            dnf-cache-${{ matrix.variant.name }}-
-
       # This actually builds the container image
       - name: Build Image
         id: build-image
@@ -92,12 +82,6 @@ jobs:
           # Point to specific containerfile
           ln -sf "${CONTAINERFILE}" Containerfile
 
-          mkdir -p /var/cache/dnf-podman-build
-
-          sudo -E $(command -v just) build \
-            ${IMAGE_NAME} \
-            ${DEFAULT_TAG} \
-            --build-arg-file=<(echo "DNF_CACHE_DIR=/var/cache/dnf-podman-build") || \
           sudo -E $(command -v just) build \
             ${IMAGE_NAME} \
             ${DEFAULT_TAG}
