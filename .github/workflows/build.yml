@@ -34,8 +34,8 @@ jobs:
       packages: write
       id-token: write
 
+    # These stage versions are pinned by https://github.com/renovatebot/renovate
     steps:
-      # These stage versions are pinned by https://github.com/renovatebot/renovate
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
@@ -114,11 +114,11 @@ jobs:
       # https://github.com/coreos/chunkah
       # You can delete the Rechunk with rpm-ostree portion then if you use this
       - name: Rechunk with Chunkah
-       id: rechunk
-       run: |
-         sudo -E $(command -v just) rechunk \
-           ${IMAGE_NAME} \
-           ${DEFAULT_TAG}
+        id: rechunk
+        run: |
+          sudo -E $(command -v just) rechunk \
+            ${IMAGE_NAME} \
+            ${DEFAULT_TAG}
 
       - name: Generate Build Tags
         id: gen-build-tags
