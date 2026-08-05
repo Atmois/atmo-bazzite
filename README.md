@@ -29,7 +29,7 @@ This repo builds two variants:
 - [Audacity](https://audacityteam.org/)
 - [Blender](https://blender.org/)
 - [Composer](https://getcomposer.org/)
-- [Dijikame](https://digikam.org/)
+- [Dijikam](https://digikam.org/)
 - [Golang](https://golang.org/)
 - [Gwenview](https://kde.org/applications/graphics/gwenview/)
 - [Hadolint](https://github.com/hadolint/hadolint)
