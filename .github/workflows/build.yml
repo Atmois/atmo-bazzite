@@ -75,6 +75,16 @@ jobs:
           echo "CONTAINERFILE=${{ matrix.variant.containerfile }}" >> ${GITHUB_ENV}
           echo "BASE_IMAGE=${{ matrix.variant.base_image }}" >> ${GITHUB_ENV}
 
+      # Cache dnf package downloads between runs so unchanged packages
+      - name: Cache DNF packages
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            /var/cache/dnf-podman-build
+          key: dnf-cache-${{ matrix.variant.name }}-${{ hashFiles('Containerfile*', 'build_files/**') }}
+          restore-keys: |
+            dnf-cache-${{ matrix.variant.name }}-
+
       # This actually builds the container image
       - name: Build Image
         id: build-image
@@ -82,27 +92,33 @@ jobs:
           # Point to specific containerfile
           ln -sf "${CONTAINERFILE}" Containerfile
 
+          mkdir -p /var/cache/dnf-podman-build
+
+          sudo -E $(command -v just) build \
+            ${IMAGE_NAME} \
+            ${DEFAULT_TAG} \
+            --build-arg-file=<(echo "DNF_CACHE_DIR=/var/cache/dnf-podman-build") || \
           sudo -E $(command -v just) build \
             ${IMAGE_NAME} \
             ${DEFAULT_TAG}
 
       # This is optional, this provides smaller delta updates
-      - name: Rechunk with rpm-ostree
-        id: rechunk
-        run: |
-          sudo -E $(command -v just) ostree-rechunk \
-            ${IMAGE_NAME} \
-            ${DEFAULT_TAG}
+      # - name: Rechunk with rpm-ostree
+      #   id: rechunk
+      #   run: |
+      #     sudo -E $(command -v just) ostree-rechunk \
+      #       ${IMAGE_NAME} \
+      #       ${DEFAULT_TAG}
 
       # If you are feeling adventurous, use the new distro agnostic rechunker
       # https://github.com/coreos/chunkah
       # You can delete the Rechunk with rpm-ostree portion then if you use this
-      #- name: Rechunk with Chunkah
-      #  id: rechunk
-      #  run: |
-      #    sudo -E $(command -v just) rechunk \
-      #      ${IMAGE_NAME} \
-      #      ${DEFAULT_TAG}
+      - name: Rechunk with Chunkah
+       id: rechunk
+       run: |
+         sudo -E $(command -v just) rechunk \
+           ${IMAGE_NAME} \
+           ${DEFAULT_TAG}
 
       - name: Generate Build Tags
         id: gen-build-tags

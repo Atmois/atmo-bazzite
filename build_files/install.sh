@@ -43,13 +43,6 @@ terraPackages=(
     "vesktop"
 )
 
-packages=(
-    ${terraPackages[@]}
-    ${fedoraPackages[@]}
-)
-
-dnf install -y ${packages[@]}
-
 # External packages
 externalPackages=(
     "https://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_x86_64.rpm"
@@ -60,7 +53,7 @@ externalPackages=(
     "$(curl -s https://api.github.com/repos/TriliumNext/Trilium/releases/latest | grep -oP '"browser_download_url": "\K[^"]*linux-x64\.rpm')"
 )
 
-# Ensure /opt is a real directories for RPM installation
+# Ensure /opt is a real directory for RPM installation
 [ -L /opt ] && rm -f /opt
 mkdir -p /opt
 
@@ -68,8 +61,13 @@ mkdir -p /opt
 [ -L /usr/local ] && rm -f /usr/local
 mkdir -p /usr/local/bin
 
-# Install external packages
-dnf install -y ${externalPackages[@]}
+# Install Everything
+packages=(
+    ${terraPackages[@]}
+    ${fedoraPackages[@]}
+    ${externalPackages[@]}
+)
+dnf install -y ${packages[@]}
 
 # Relocate /opt contents to factory path and convert to symlink
 mkdir -p /usr/share/factory/var/opt
