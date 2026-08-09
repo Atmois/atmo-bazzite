@@ -30,6 +30,7 @@ fedoraPackages=(
     "stellarium"
     "telnet"
     "thunderbird"
+    "yt-dlp"
     "zsh-autosuggestions"
     "zsh-syntax-highlighting"
 )

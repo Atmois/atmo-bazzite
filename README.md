@@ -51,6 +51,7 @@ This repo builds two variants:
 - [Picard](https://picard.musicbrainz.org/)
 - [Telnet](https://gnu.org/software/inetutils/)
 - [Thunderbird](https://thunderbird.net/)
+- [yt-dlp](https://github.com/yt-dlp/yt-dlp)
 - [Zsh-Autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 - [Zsh-Syntax-Highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 
