@@ -44,6 +44,21 @@ terraPackages=(
     "vesktop"
 )
 
+# Ensure /opt is a real directory for RPM installation
+[ -L /opt ] && rm -f /opt
+mkdir -p /opt
+
+# Ensure /usr/local is a real directory for Cloudflared
+[ -L /usr/local ] && rm -f /usr/local
+mkdir -p /usr/local/bin
+
+# Install Repo Packages
+packages=(
+    ${terraPackages[@]}
+    ${fedoraPackages[@]}
+)
+dnf install -y ${packages[@]}
+
 # External packages
 externalPackages=(
     "https://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_x86_64.rpm"
@@ -54,24 +69,11 @@ externalPackages=(
     "$(curl -s https://api.github.com/repos/TriliumNext/Trilium/releases/latest | grep -oP '"browser_download_url": "\K[^"]*linux-x64\.rpm')"
 )
 
-# Ensure /opt is a real directory for RPM installation
-[ -L /opt ] && rm -f /opt
-mkdir -p /opt
-
-# Ensure /usr/local is a real directory for Cloudflared
-[ -L /usr/local ] && rm -f /usr/local
-mkdir -p /usr/local/bin
-
-# Install Everything
-packages=(
-    ${terraPackages[@]}
-    ${fedoraPackages[@]}
-    ${externalPackages[@]}
-)
-dnf install -y ${packages[@]}
-
-# Fix a build-id issue
-rm -rf /usr/lib/.build-id
+for url in "${externalPackages[@]}"; do
+    [ -z "$url" ] && continue
+    dnf install -y "$url"
+    rm -rf /usr/lib/.build-id
+done
 
 # Relocate /opt contents to factory path and convert to symlink
 mkdir -p /usr/share/factory/var/opt
