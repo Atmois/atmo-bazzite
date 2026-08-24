@@ -18,7 +18,6 @@ fedoraPackages=(
     "inkscape"
     "kcolorchooser"
     "kdenlive"
-    "mediawriter"
     "micro"
     "musescore"
     "nmap"
@@ -27,7 +26,6 @@ fedoraPackages=(
     "obs-studio"
     "php"
     "picard"
-    "stellarium"
     "telnet"
     "thunderbird"
     "yt-dlp"
@@ -63,7 +61,6 @@ dnf install -y ${packages[@]}
 externalPackages=(
     "https://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_x86_64.rpm"
     "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm"
-    "https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm"
     "$(curl -s https://api.github.com/repos/ONLYOFFICE/DesktopEditors/releases/latest | grep -oP '"browser_download_url": "\K[^"]*desktopeditors\.x86_64\.rpm')"
     "https://vivaldi.com/download/vivaldi-stable.x86_64.rpm"
     "$(curl -s https://api.github.com/repos/TriliumNext/Trilium/releases/latest | grep -oP '"browser_download_url": "\K[^"]*linux-x64\.rpm')"

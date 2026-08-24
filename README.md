@@ -38,7 +38,6 @@ This repo builds two variants:
 - [KColorChooser](https://kde.org/applications/graphics/kcolorchooser/)
 - [Inkscape](https://inkscape.org/)
 - [Kdenlive](https://kdenlive.org/)
-- [MediaWriter](https://github.com/FedoraQt/MediaWriter)
 - [Micro](https://micro-editor.github.io/)
 - [Netcat](https://nmap.org)
 - [Nmap](https://nmap.org/)
@@ -47,7 +46,6 @@ This repo builds two variants:
 - [OBS](https://obsproject.com/)
 - [PHP](https://php.net/)
 - [Piper](https://github.com/libratbag/piper)
-- [Stellarium](https://stellarium.org/)
 - [Picard](https://picard.musicbrainz.org/)
 - [Telnet](https://gnu.org/software/inetutils/)
 - [Thunderbird](https://thunderbird.net/)
@@ -65,7 +63,6 @@ This repo builds two variants:
 #### External Packages
 - [Cloudflared](https://github.com/cloudflare/cloudflared)
 - [Filen](https://filen.io)
-- [Google Chrome](https://google.com/chrome/)
 - [OnlyOffice](https://onlyoffice.com/)
 - [Trillium Notes](https://triliumnotes.org)
 - [Vivaldi](https://vivaldi.com/)
