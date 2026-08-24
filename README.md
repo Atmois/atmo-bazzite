@@ -64,7 +64,7 @@ This repo builds two variants:
 - [Cloudflared](https://github.com/cloudflare/cloudflared)
 - [Filen](https://filen.io)
 - [OnlyOffice](https://onlyoffice.com/)
-- [Trillium Notes](https://triliumnotes.org)
+- [Trillium Notes](https://triliumnotes.org) (TEMPOARILY REMOVED)
 - [Vivaldi](https://vivaldi.com/)
 
 ### Removed Packages
