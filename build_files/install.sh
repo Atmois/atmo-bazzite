@@ -71,9 +71,19 @@ externalPackages=(
 
 for url in "${externalPackages[@]}"; do
     [ -z "$url" ] && continue
-    dnf install -y "$url"
-    rm -rf /usr/lib/.build-id
+
+    tmp="$(mktemp --suffix=.rpm)"
+    curl -sL "$url" -o "$tmp"
+
+    if ! dnf install -y "$tmp"; then
+        echo "dnf install failed for $url, retrying with rpm --replacefiles"
+        rpm -Uvh --replacefiles "$tmp"
+    fi
+
+    rm -f "$tmp"
 done
+
+rm -rf /usr/lib/.build-id
 
 # Relocate /opt contents to factory path and convert to symlink
 mkdir -p /usr/share/factory/var/opt
