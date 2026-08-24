@@ -70,6 +70,9 @@ packages=(
 )
 dnf install -y ${packages[@]}
 
+# Fix a build-id issue
+rm -rf /usr/lib/.build-id
+
 # Relocate /opt contents to factory path and convert to symlink
 mkdir -p /usr/share/factory/var/opt
 cp -r /opt/* /usr/share/factory/var/opt/ 2>/dev/null || true
