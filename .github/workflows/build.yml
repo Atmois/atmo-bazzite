@@ -97,16 +97,16 @@ jobs:
       # If you are feeling adventurous, use the new distro agnostic rechunker
       # https://github.com/coreos/chunkah
       # You can delete the Rechunk with rpm-ostree portion then if you use this
-      - name: Tag image as latest for rechunk
-        run: |
-          sudo podman tag ${IMAGE_NAME}:${DEFAULT_TAG} ${IMAGE_NAME}:latest
+      # - name: Tag image as latest for rechunk
+      #   run: |
+      #     sudo podman tag ${IMAGE_NAME}:${DEFAULT_TAG} ${IMAGE_NAME}:latest
 
-      - name: Rechunk with Chunkah
-        id: rechunk
-        run: |
-          sudo -E $(command -v just) rechunk \
-            ${IMAGE_NAME} \
-            ${DEFAULT_TAG}
+      # - name: Rechunk with Chunkah
+      #   id: rechunk
+      #   run: |
+      #     sudo -E $(command -v just) rechunk \
+      #       ${IMAGE_NAME} \
+      #       ${DEFAULT_TAG}
 
       - name: Generate Build Tags
         id: gen-build-tags
