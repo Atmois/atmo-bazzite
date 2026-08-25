@@ -2,19 +2,14 @@
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/atmo-bazzite)](https://artifacthub.io/packages/search?repo=atmo-bazzite)
 [![Build container image](https://github.com/Atmois/atmo-bazzite/actions/workflows/build.yml/badge.svg)](https://github.com/Atmois/atmo-bazzite/actions/workflows/build.yml)
 
-
-I made this so I could install and remove some extra stuff from bazzite-dx. I won't take PRs or anything for it as its just for my own personal use. Some of the changes I have done are listed below. I would personally not reccommend you use this for your own setup unless you know what you are doing.
+I made this so I could install some extra stuff in bazzite-dx. I won't take PRs or anything for it as its just for my own personal use. Some of the changes I have done are listed below. I would personally not reccommend you use this for your own setup unless you know what you are doing.
 
 ## Available Variants
 
 As I do not build my own ISO files you will need to install Bazzite first and then rebase to this image. **Please ensure you have chosen the variant using the same DE you plan to use as well as the correct hardware options.**
 
-This repo builds two variants:
-- **GNOME** (`latest-gnome`): Based on `ghcr.io/ublue-os/bazzite-dx-nvidia-gnome:stable` (CURRENTLY NOT BEING UPDATED, DO NOT USE)
-  - You can rebase to the image using `rpm-ostree rebase ostree-image-signed:docker://ghcr.io/atmois/atmo-bazzite:latest-gnome`
-
-- **KDE Plasma** (`latest-kde`): Based on `ghcr.io/ublue-os/bazzite-dx-nvidia:stable`
-  - You can rebase to the image using `rpm-ostree rebase ostree-image-signed:docker://ghcr.io/atmois/atmo-bazzite:latest-kde`
+- **KDE Plasma**: Based on `ghcr.io/ublue-os/bazzite-dx-nvidia:stable`
+  - You can rebase to the image using `rpm-ostree rebase ostree-image-signed:docker://ghcr.io/atmois/atmo-bazzite:latest`
 
 ### Sources
 
@@ -66,6 +61,3 @@ This repo builds two variants:
 - [OnlyOffice](https://onlyoffice.com/)
 - [Trillium Notes](https://triliumnotes.org) (TEMPOARILY REMOVED)
 - [Vivaldi](https://vivaldi.com/)
-
-### Removed Packages
-- Lutris
