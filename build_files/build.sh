@@ -48,8 +48,8 @@ externalPackages=(
     "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm"
     "https://github.com/ONLYOFFICE/DesktopEditors/releases/latest/download/onlyoffice-desktopeditors.x86_64.rpm"
     "https://vivaldi.com/download/vivaldi-stable.x86_64.rpm"
+    "$(curl -s https://api.github.com/repos/TriliumNext/Trilium/releases/latest | grep -o '"browser_download_url": *"[^"]*x64[^"]*\.rpm"' | cut -d'"' -f4)"
 )
-#"$(curl -s https://api.github.com/repos/TriliumNext/Trilium/releases/latest | grep -oP '"browser_download_url": "\K[^"]*linux-x64\.rpm')"
 
 # Ensure /opt is a real directory for RPM installation
 [ -L /opt ] && rm -f /opt
