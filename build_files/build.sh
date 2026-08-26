@@ -44,11 +44,9 @@ terraPackages=(
 
 # External packages
 externalPackages=(
-    "https://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_x86_64.rpm"
     "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm"
     "https://github.com/ONLYOFFICE/DesktopEditors/releases/latest/download/onlyoffice-desktopeditors.x86_64.rpm"
     "https://vivaldi.com/download/vivaldi-stable.x86_64.rpm"
-    "$(curl -s https://api.github.com/repos/TriliumNext/Trilium/releases/latest | grep -o '"browser_download_url": *"[^"]*x64[^"]*\.rpm"' | cut -d'"' -f4)"
 )
 
 # Ensure /opt is a real directory for RPM installation
@@ -66,6 +64,16 @@ packages=(
     ${externalPackages[@]}
 )
 dnf install -y ${packages[@]}
+
+# Filen and Trilium are installed separately
+filenUrl="https://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_x86_64.rpm"
+triliumUrl="$(curl -s https://api.github.com/repos/TriliumNext/Trilium/releases/latest | grep -o '"browser_download_url": *"[^"]*x64[^"]*\.rpm"' | cut -d'"' -f4)"
+
+curl -Lo /tmp/filen.rpm "$filenUrl"
+curl -Lo /tmp/trilium.rpm "$triliumUrl"
+rpm -i --nodeps /tmp/filen.rpm
+rpm -i --nodeps --replacefiles /tmp/trilium.rpm
+rm -f /tmp/filen.rpm /tmp/trilium.rpm
 
 # Relocate /opt contents to factory path and convert to symlink
 mkdir -p /usr/share/factory/var/opt
