@@ -6,7 +6,7 @@ I made this so I could install some extra stuff in bazzite-dx. I won't take PRs 
 
 ## Available Variants
 
-As I do not build my own ISO files you will need to install Bazzite first and then rebase to this image. **Please ensure you have chosen the variant using the same DE you plan to use as well as the correct hardware options.**
+As I do not build my own ISO files you will need to install Bazzite first and then rebase to this image. **Ensure you have chosen the variant using the same DE you plan to use as well as the correct hardware options.**
 
 - **KDE Plasma**: Based on `ghcr.io/ublue-os/bazzite-dx-nvidia:stable`
   - You can rebase to the image using `rpm-ostree rebase ostree-image-signed:docker://ghcr.io/atmois/atmo-bazzite:latest`
@@ -24,6 +24,7 @@ As I do not build my own ISO files you will need to install Bazzite first and th
 - [Audacity](https://audacityteam.org/)
 - [Blender](https://blender.org/)
 - [Composer](https://getcomposer.org/)
+- [Darktable](https://darktable.org)
 - [Dijikam](https://digikam.org/)
 - [Golang](https://golang.org/)
 - [Gwenview](https://kde.org/applications/graphics/gwenview/)
@@ -32,7 +33,9 @@ As I do not build my own ISO files you will need to install Bazzite first and th
 - [Hyfetch](https://github.com/hykilpikonna/hyfetch)
 - [KColorChooser](https://kde.org/applications/graphics/kcolorchooser/)
 - [Inkscape](https://inkscape.org/)
+- [KCalc](https://apps.kde.org/en-gb/kcalc/)
 - [Kdenlive](https://kdenlive.org/)
+- [Merkuro](https://apps.kde.org/en-gb/merkuro/)
 - [Micro](https://micro-editor.github.io/)
 - [Netcat](https://nmap.org)
 - [Nmap](https://nmap.org/)
