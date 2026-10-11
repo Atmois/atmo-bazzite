@@ -1,7 +1,7 @@
 name: Build container image
 on:
   schedule:
-    - cron: '05 3 * * *'  # 3:05am UTC everyday
+    - cron: '20 3 * * *'  # 3:05am UTC everyday
   push:
     paths-ignore:
       - '**/README.md'
