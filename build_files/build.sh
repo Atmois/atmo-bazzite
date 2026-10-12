@@ -20,7 +20,6 @@ fedoraPackages=(
     "kcalc"
     "kcolorchooser"
     "kdenlive"
-    "merkuro"
     "micro"
     "musescore"
     "nmap"

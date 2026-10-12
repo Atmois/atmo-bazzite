@@ -35,7 +35,6 @@ As I do not build my own ISO files you will need to install Bazzite first and th
 - [Inkscape](https://inkscape.org/)
 - [KCalc](https://apps.kde.org/en-gb/kcalc/)
 - [Kdenlive](https://kdenlive.org/)
-- [Merkuro](https://apps.kde.org/en-gb/merkuro/)
 - [Micro](https://micro-editor.github.io/)
 - [Netcat](https://nmap.org)
 - [Nmap](https://nmap.org/)
