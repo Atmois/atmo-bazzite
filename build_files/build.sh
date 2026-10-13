@@ -12,6 +12,7 @@ fedoraPackages=(
     "darktable"
     "digikam"
     "golang"
+    "gparted"
     "gwenview"
     "hadolint"
     "haruna"

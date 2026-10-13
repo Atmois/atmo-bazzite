@@ -27,6 +27,7 @@ As I do not build my own ISO files you will need to install Bazzite first and th
 - [Darktable](https://darktable.org)
 - [Dijikam](https://digikam.org/)
 - [Golang](https://golang.org/)
+- [Gparted](https://gparted.org/)
 - [Gwenview](https://kde.org/applications/graphics/gwenview/)
 - [Hadolint](https://github.com/hadolint/hadolint)
 - [Haruna](https://haruna.kde.org/)
