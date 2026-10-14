@@ -68,14 +68,15 @@ packages=(
 )
 dnf install -y ${packages[@]}
 
-# Filen and Trilium are installed separately
+# Filen, Lumine and Trilium are installed separately
 filenUrl="https://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_x86_64.rpm"
 triliumUrl="$(curl -s https://api.github.com/repos/TriliumNext/Trilium/releases/latest | grep -o '"browser_download_url": *"[^"]*x64[^"]*\.rpm"' | cut -d'"' -f4)"
 lumineUrl="$(curl -s https://api.github.com/repos/Netflate/LumineCapture/releases/latest | grep -o '"browser_download_url": *"[^"]*\.rpm"' | cut -d'"' -f4)"
 
-curl -Lo /tmp/lumine.rpm "$lumineUrl"
-curl -Lo /tmp/filen.rpm "$filenUrl"
-curl -Lo /tmp/trilium.rpm "$triliumUrl"
+curl -fLo /tmp/lumine.rpm "$lumineUrl"
+curl -fLo /tmp/filen.rpm "$filenUrl"
+curl -fLo /tmp/trilium.rpm "$triliumUrl"
+rpm -qp /tmp/lumine.rpm /tmp/filen.rpm /tmp/trilium.rpm >/dev/null
 rpm -i --nodeps /tmp/lumine.rpm
 rpm -i --nodeps /tmp/filen.rpm
 rpm -i --nodeps --replacefiles /tmp/trilium.rpm
