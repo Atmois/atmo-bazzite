@@ -62,6 +62,5 @@ As I do not build my own ISO files you will need to install Bazzite first and th
 - [Cloudflared](https://github.com/cloudflare/cloudflared)
 - [Filen](https://filen.io)
 - [OnlyOffice](https://onlyoffice.com/)
-- [LumineCapture](https://github.com/Netflate/LumineCapture)
 - [Trillium Notes](https://triliumnotes.org)
 - [Vivaldi](https://vivaldi.com/)
