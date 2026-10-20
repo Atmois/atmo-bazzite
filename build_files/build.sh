@@ -31,6 +31,7 @@ fedoraPackages=(
     "picard"
     "telnet"
     "thunderbird"
+    "uv"
     "yt-dlp"
     "zsh-autosuggestions"
     "zsh-syntax-highlighting"
