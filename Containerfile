@@ -6,6 +6,8 @@ COPY build_files /
 # hadolint ignore=DL3007
 FROM ghcr.io/ublue-os/bazzite-dx-nvidia:latest
 
+RUN rm /opt && mkdir /opt
+
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \

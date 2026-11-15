@@ -11,9 +11,6 @@ externalPackages=(
     "$triliumUrl"
 )
 
-# Ensure the /var/opt exists for Filen, OnlyOffice & Vivaldi
-mkdir -p /var/opt
-
 # Ensure /usr/local is a real directory for Cloudflared
 [ -L /usr/local ] && rm -f /usr/local
 mkdir -p /usr/local/bin
@@ -25,11 +22,3 @@ packages=(
     ${externalPackages[@]}
 )
 dnf install -y ${packages[@]}
-
-# Move /opt installs into the immutable image and symlink at boot
-mkdir -p /usr/lib/opt /usr/lib/tmpfiles.d
-for name in Filen onlyoffice vivaldi; do
-    [ -d "/var/opt/$name" ] || continue
-    mv "/var/opt/$name" "/usr/lib/opt/$name"
-    echo "L+ /var/opt/$name - - - - /usr/lib/opt/$name" >> /usr/lib/tmpfiles.d/atmo-opt.conf
-done
