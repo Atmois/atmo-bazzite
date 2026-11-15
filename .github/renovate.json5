@@ -4,17 +4,12 @@
     "config:best-practices",
   ],
   "rebaseWhen": "never",
+  "automerge": true,
   "packageRules": [
     {
-      "automerge": true,
-      "matchUpdateTypes": ["pin", "pinDigest"]
-    },
-    // This prevents the default demo image used in ublue-os/image-template
-    // from being pinned as it serves no purpose there
-    {
       "matchDatasources": ["docker"],
-      "matchPackageNames": ["ghcr.io/ublue-os/bazzite"],
-      "pinDigests": false
+      "matchPackageNames": ["ghcr.io/ublue-os/bazzite-dx-nvidia"],
+      "enabled": false
     },
     {
       "enabled": false,
@@ -22,10 +17,5 @@
       "matchDepTypes": ["container"],
       "matchFileNames": [".github/workflows/**.yaml", ".github/workflows/**.yml"],
     },
-    {
-      "matchFileNames": ["Containerfile.kde", "Containerfile.gnome"],
-      "matchDatasources": ["docker"],
-      "pinDigests": false
-    }
   ]
 }
