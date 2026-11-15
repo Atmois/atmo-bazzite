@@ -2,7 +2,8 @@
 FROM scratch AS ctx
 COPY build_files /
 
-# Base Image - KDE variant
+# Base Image
+# hadolint ignore=DL3007
 FROM ghcr.io/ublue-os/bazzite-dx-nvidia:latest
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
