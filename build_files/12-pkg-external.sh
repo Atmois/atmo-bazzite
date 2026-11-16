@@ -8,6 +8,7 @@ externalPackages=(
     "https://github.com/ONLYOFFICE/DesktopEditors/releases/latest/download/onlyoffice-desktopeditors.x86_64.rpm"
     "https://vivaldi.com/download/vivaldi-stable.x86_64.rpm"
     "https://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_x86_64.rpm"
+    "https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm"
     "$triliumUrl"
 )
 
