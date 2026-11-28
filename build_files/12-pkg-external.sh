@@ -2,7 +2,9 @@
 set -ouex pipefail
 
 # External packages
-triliumUrl="$(curl -sS https://api.github.com/repos/TriliumNext/Trilium/releases/latest | grep -o 'https://[^"]*linux-x64\.rpm')"
+triliumTag="$(curl -fsSL -o /dev/null -w '%{url_effective}' https://github.com/TriliumNext/Trilium/releases/latest | xargs basename)"
+triliumUrl="https://github.com/TriliumNext/Trilium/releases/download/${triliumTag}/TriliumNotes-${triliumTag}-linux-x64.rpm"
+
 externalPackages=(
     "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm"
     "https://github.com/ONLYOFFICE/DesktopEditors/releases/latest/download/onlyoffice-desktopeditors.x86_64.rpm"
@@ -16,10 +18,5 @@ externalPackages=(
 [ -L /usr/local ] && rm -f /usr/local
 mkdir -p /usr/local/bin
 
-# Install Repo Packages
-packages=(
-    ${terraPackages[@]}
-    ${fedoraPackages[@]}
-    ${externalPackages[@]}
-)
-dnf install -y ${packages[@]}
+# Install External Packages
+dnf install -y ${externalPackages[@]}
